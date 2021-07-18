@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To Do list app</title>
+  <script src="script.js"></script>
+</head>
+
+<style>
+  body {
+    text-align: center;
+    margin: 0;
+    min-width: 250px;
+  }
+
+  /* Include the padding and border in an element's total width and height */
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Remove margins and padding from the list */
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Style the list items */
+  ul li {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    background: #eee;
+    font-size: 18px;
+    transition: 0.2s;
+
+
+  }
+
+  /* Set all odd list items to a different color (zebra-stripes) */
+  ul li:nth-child(odd) {
+    background: #f9f9f9;
+  }
+
+  /* Darker background-color on hover */
+  ul li:hover {
+    background: #ddd;
+  }
+
+  /* When clicked on, add a background color and strike out text */
+  ul li.checked {
+    background: #888;
+    color: #fff;
+    text-decoration: line-through;
+  }
+
+  /* Add a "checked" mark when clicked on */
+  ul li.checked::before {
+    content: '';
+    position: absolute;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 10px;
+    left: 16px;
+    transform: rotate(45deg);
+    height: 15px;
+    width: 7px;
+  }
+
+  /* Style the close button */
+  .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+  }
+
+  .close:hover {
+    background-color: #f44336;
+    color: white;
+  }
+
+  /* Style the header */
+  .header {
+    background-color: green;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 30px 40px;
+    color: white;
+    text-align: center;
+  }
+
+  /* Clear floats after the header */
+  .header:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  /* input */
+  #myInput {
+    margin: 0;
+    border: 2px solid black;
+    border-radius: 8px;
+    width: 60%;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+  }
+
+  /* Style the "Add" button */
+  .addBtn {
+    padding: 10px;
+    width: 15%;
+    background: white;
+    border: 2px solid black;
+    border-radius: 8px;
+    color: black;
+    float: left;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+
+  }
+
+  .addBtn:hover {
+    background-color: red;
+
+  }
+
+  .deleteBtn {
+    padding: 10px;
+    width: 15%;
+    background: white;
+    border: 2px solid black;
+    border-radius: 8px;
+    color: black;
+    float: left;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .deleteBtn:hover {
+    background-color: red;
+
+  }
+
+  /* style for details */
+  .remove {
+    margin: 20px 20px;
+    border: 2px solid red;
+    padding: 5px 5px;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .edit {
+
+    border: 2px solid red;
+    padding: 5px 5px;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .container {
+    margin: 30px 0px;
+    background-color: rgb(228, 224, 224);
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 30px 40px;
+    color: black;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .form-group {
+    margin: 5px 5px;
+    padding: 5px 5px;
+
+  }
+
+  #email {
+    margin: 10px 10px;
+    border: 2px solid red;
+    border-radius: 8px;
+  }
+
+  #messeage {
+
+    border: 2px solid red;
+    border-radius: 8px;
+
+
+  }
+
+  /* for submit button */
+  #submit {
+    border: 2px solid red;
+    border-radius: 8px;
+    margin: 12px 12px;
+    font-weight: bold;
+    padding: 8px;
+    background-color: rgb(146, 122, 122);
+    cursor: pointer;
+  }
+  #submit:hover{
+    background-color: hotpink;
+  }
+
+
+
+  /* body {
+
+        text-align: center;
+    } */
+
+  h1 {
+    text-align: center;
+    margin: 50px 15px;
+    color: black;
+    font-size: 45px;
+  }
+
+  #name {
+    margin: 10px 10px;
+    border: 2px solid red;
+    border-radius: 8px;
+
+  }
+
+  #password {
+    margin: 10px 10px;
+    border: 2px solid red;
+    border-radius: 8px;
+
+  }
+
+  #btn {
+    margin: 20px 20px;
+    border: 2px solid red;
+    padding: 5px 5px;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  #btn:hover {
+    background-color: salmon;
+  }
+
+  #form {
+
+    margin: 25px;
+    font-size: 25px;
+  }
+</style>
+
+<body>
+  <h1>Login screen</h1>
+  <div id="error"></div>
+  <form id="form" class="Input" action="/" method="GET">
+    <div>
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" required>
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password">
+    </div>
+    <button id="btn">Submit</button>
+  </form>
+  <div id="myDIV" class="header">
+    <h2>List Tasks Screen</h2>
+    <input type="text" id="myInput" placeholder="Title...">
+    <span onclick="newElement()" class="addBtn">Add</span>
+    <span onclick="myFunction()" class="deleteBtn">DeleteAll</span>
+
+  </div>
+
+  <ul id="myUL">
+    <li>java</li>
+    <li class="checked">web developer</li>
+    <li>HTML</li>
+    <li>SQL</li>
+    <li>PYTHON</li>
+    <li>CSS</li>
+  </ul>
+
+
+  <div class="container" id="cont1">
+    <h1>Decription of the task</h1>
+
+    <p>
+      The To-Do List app allows a user to create, read, update or delete to-do tasks.
+    </p>
+    <p id="p1">In the To do list app we edit the task when click on edit button</p>
+    <span onclick="myDelete()" class="edit">Edit</span>
+  </div>
+
+  <section id="text">
+    <h1 class="h-primary center"> Write About Yourself </h1>
+    <div id="contact-box">
+      <form action="">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name" placeholder="Enter Your Name">
+        </div>
+        <div class="form-group">
+          <label for="Email">EmailUs:</label>
+          <input type="email" name="name" id="email" placeholder="Enter Your Email">
+        </div>
+        <div class="form-group">
+          <label for="messeage">Messeage:</label>
+          <textarea name="messeage" id="messeage"></textarea>
+        </div>
+        <button id="submit">Submit</button>
+      </form>
+      
+    </div>
+  </section>
+  
+
+
+  <!-- 
+login screen js -->
+
+  <script>
+    const name = document.getElementById('name')
+    const password = document.getElementById('password')
+    const form = document.getElementById('form')
+    const errorElement = document.getElementById('error');
+
+
+
+    form.addEventListener('submit', (e) => {
+      let messages = []
+      if (name.value === '' || name.value == null) {
+        messages.push('Name is required')
+      }
+      if (password.value.length <= 6) {
+        messages.push('Password must be longer than 6 characters')
+      }
+      // if (password.value.length >= 20) {
+      //     messages.push('Password must be less than 20 characters')
+      // }
+
+
+      if (messeage.value.length > 0) {
+        e.preventDefault();
+        errorElement.innerText = messages.join(', ');
+      }
+
+    })
+
+    // to do list app js
+    var myNodelist = document.getElementsByTagName("LI");
+    var i;
+    for (i = 0; i < myNodelist.length; i++) {
+      var span = document.createElement("SPAN");
+      var txt = document.createTextNode("\u00D7");
+      span.className = "close";
+      span.appendChild(txt);
+      myNodelist[i].appendChild(span);
+    }
+    // Click on a close button to hide the current list item
+    var close = document.getElementsByClassName("close");
+    var i;
+    for (i = 0; i < close.length; i++) {
+      close[i].onclick = function () {
+        var div = this.parentElement;
+        div.style.display = "none";
+      }
+    }
+    // Add a "checked" symbol when clicking on a list item
+    var list = document.querySelector('ul');
+    list.addEventListener('click', function (ev) {
+      if (ev.target.tagName === 'LI') {
+        ev.target.classList.toggle('checked');
+      }
+    }, false);
+    // Create a new list item when clicking on the "Add" button
+    function newElement() {
+      var li = document.createElement("li");
+      var inputValue = document.getElementById("myInput").value;
+      var t = document.createTextNode(inputValue);
+      li.appendChild(t);
+      if (inputValue === '') {
+        alert("You must write something!");
+      } else {
+        document.getElementById("myUL").appendChild(li);
+      }
+      document.getElementById("myInput").value = "";
+
+      var span = document.createElement("SPAN");
+      var txt = document.createTextNode("\u00D7");
+      span.className = "close";
+      span.appendChild(txt);
+      li.appendChild(span);
+
+      for (i = 0; i < close.length; i++) {
+        close[i].onclick = function () {
+          var div = this.parentElement;
+          div.style.display = "none";
+        }
+      }
+    }
+    function myFunction() {
+      var list = document.getElementById("myUL");
+      while (list.hasChildNodes()) {
+        list.removeChild(list.firstChild);
+      }
+    }
+
+
+    function myDelete() {
+      document.getElementById("p1").innerHTML = "This is edit paragraph";
+    }
+  </script>
+</body>
+
+</html>
